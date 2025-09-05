@@ -27,18 +27,16 @@ void print_digit(char c, int position, struct dictionary *dict)
     int digit = c - '0';
     char *word = dict[digit].wording;
     write(1, word, strlen(word));
-    write(1, " ", 1);
+    if (position > 1)
+        write(1, " ", 1);
 }
 
 void print_number(char *str, struct dictionary *dict)
 {
     int len = count_len(str);
-    while (len)
-    {
-        print_digit(str[len - 1], len, dict);
-        len--;
-    }
-    write(1, "\n", 1);
+    print_digit(str[0], len, dict);
+    if (*(str + 1))
+        print_number(str + 1, dict);
 }
 
 int is_number(char *str)
