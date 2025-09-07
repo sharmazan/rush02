@@ -28,6 +28,7 @@ int check_input(char *input)
 {
 	int	i;
 
+	i = 0;
 	while (input[i])
 	{
 		if (!ft_isdigit(input[i]))
@@ -40,24 +41,9 @@ int check_input(char *input)
 	return (1);
 }
 
-char	*find_value(char *key, t_dict *dict)
-{
-	t_dict	*cur;
-
-	cur = dict;
-	while (cur)
-	{
-		if (ft_strcmp(cur->key, key) == 0)
-			return (cur->value);
-		cur = cur->next;
-	}
-	return (NULL);
-}
-
 int	main(int argc, char **argv)
 {
 	t_dict	*dict;
-	t_dict	*cur;
 
 	if (argc > 3 || argc < 2)
 	{
@@ -67,21 +53,16 @@ int	main(int argc, char **argv)
 	if (!check_input(argv[argc - 1]))
 		return (1);
 	if (argc == 2)
-		dict = parse_dict("numbers.txt");
+		dict = parse_dict("numbers.dict");
 	else
 		dict = parse_dict(argv[1]);
 	if (!dict)
-		write_dict_error();
-	cur = dict;
-	while (cur)
 	{
-		ft_putstr("Key: ");
-		ft_putstr(cur->key);
-		ft_putstr(" | Value: ");
-		ft_putstr(cur->value);
-		ft_putchar('\n');
-		cur = cur->next;
+		write_dict_error();
+		return (1);
 	}
+	convert_number(argv[argc - 1], dict);
+	ft_putchar('\n');
 	free_dict(dict);
 	return (0);
 }

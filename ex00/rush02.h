@@ -1,5 +1,4 @@
 #ifndef RUSH_02
-
 # define RUSH_02
 
 typedef struct s_dict
@@ -21,4 +20,9 @@ void				free_dict(t_dict *dict);
 int					ft_strcmp(char *s1, char *s2);
 void				ft_putstr(char *str);
 void				ft_putchar(char c);
+char				*find_value(char *key, t_dict *dict);
+void				convert_number(char *number, t_dict *dict);
+void				write_error(void);
+void				write_dict_error(void);
+
 #endif

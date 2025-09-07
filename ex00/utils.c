@@ -125,3 +125,17 @@ char	*trim_spaces(char *str)
 	}
 	return (str + start);
 }
+
+char	*find_value(char *key, t_dict *dict)
+{
+	t_dict	*cur;
+
+	cur = dict;
+	while (cur)
+	{
+		if (ft_strcmp(cur->key, key) == 0)
+			return (cur->value);
+		cur = cur->next;
+	}
+	return (NULL);
+}
