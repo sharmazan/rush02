@@ -19,4 +19,6 @@ char				*trim_spaces(char *str);
 t_dict				*parse_dict(const char *filename);
 void				free_dict(t_dict *dict);
 int					ft_strcmp(char *s1, char *s2);
+void				ft_putstr(char *str);
+void				ft_putchar(char c);
 #endif

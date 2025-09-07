@@ -19,17 +19,25 @@ void	write_error(void)
 	write(1, "Error\n", 6);
 }
 
-void	write_dict_error(void){write(1, "Dict Error\n",
-		)} check_input(char *input)
+void	write_dict_error(void)
+{
+	write(1, "Dict Error\n", 12);
+}
+
+int check_input(char *input)
 {
 	int	i;
 
 	while (input[i])
 	{
 		if (!ft_isdigit(input[i]))
+		{
 			write_error();
+			return (0);
+		}
+		i++;
 	}
-	i++;
+	return (1);
 }
 
 char	*find_value(char *key, t_dict *dict)
@@ -45,6 +53,7 @@ char	*find_value(char *key, t_dict *dict)
 	}
 	return (NULL);
 }
+
 int	main(int argc, char **argv)
 {
 	t_dict	*dict;
@@ -55,14 +64,12 @@ int	main(int argc, char **argv)
 		write_error();
 		return (1);
 	}
+	if (!check_input(argv[argc - 1]))
+		return (1);
 	if (argc == 2)
-	{
-		check_input(argv[1]);
-		dict = parse_dict("numbers.txt")
-	}
-	if (argc == 3)
-		check_input(argv[2]);
-	dict = parse_dict(argv[1]);
+		dict = parse_dict("numbers.txt");
+	else
+		dict = parse_dict(argv[1]);
 	if (!dict)
 		write_dict_error();
 	cur = dict;
